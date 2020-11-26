@@ -1,63 +1,73 @@
 <template>
   <form @submit.prevent="submit">
-    <FormInput type="text" name="Username" v-model="username" :error="usernameStatus.message" />
-    <FormInput type="password" name="Password" v-model="password" :error="passwordStatus.message" />
+    <FormInput
+      type="text"
+      name="Username"
+      v-model="username"
+      :error="usernameStatus.message"
+    />
+    <FormInput
+      type="password"
+      name="Password"
+      v-model="password"
+      :error="passwordStatus.message"
+    />
     <p>
-      <small>(Sign in with "password" as the password)</small>
+      <small>(press "Submit" to sign in as host)</small>
     </p>
     <button :disabled="loading" class="button is-primary">Submit</button>
   </form>
 </template>
 
 <script lang="ts">
-import { required, length, validate, Status } from './validators'
-import { defineComponent, computed, ref } from 'vue'
-import FormInput from './FormInput.vue'
-import { User } from './types'
-import { useStore } from './store'
-import { useModal } from './useModal'
+import { required, length, validate, Status } from "./validators";
+import { defineComponent, computed, ref } from "vue";
+import FormInput from "./FormInput.vue";
+import { User } from "./types";
+import { useStore } from "./store";
+import { useModal } from "./useModal";
 
 export default defineComponent({
-  name: 'Signin',
+  name: "Signin",
   components: {
-    FormInput
+    FormInput,
   },
 
-  setup () {
-    const loading = ref(false)
-    const username = ref('username')
+  setup() {
+    const loading = ref(false);
+    const username = ref("username");
     const usernameStatus = computed<Status>(() => {
-      return validate(username.value, [])
-    })
+      return validate(username.value, []);
+    });
 
-    const password = ref('password')
+    const password = ref("password");
     const passwordStatus = computed<Status>(() => {
-      return validate(password.value, [])
-    })
+      return validate(password.value, []);
+    });
 
-    const store = useStore()
-    const modal = useModal()
+    const store = useStore();
+    const modal = useModal();
 
-    const delay = (ms: number) => new Promise(res => setTimeout(res, ms))
+    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
     const submit = async (e: any) => {
-      loading.value = true
-      await delay(500)
-      loading.value = false
+      loading.value = true;
+      await delay(500);
+      loading.value = false;
 
-      if (password.value !== 'password') {
-        return
+      if (password.value !== "password") {
+        return;
       }
 
       const user: User = {
         id: 1,
-        password: '',
-        username: 'username'
-      }
+        password: "",
+        username: "San",
+      };
 
-      await store.signin(user)
-      modal.hideModal()
-    }
+      await store.signin(user);
+      modal.hideModal();
+    };
 
     return {
       loading,
@@ -66,9 +76,9 @@ export default defineComponent({
       username,
       password,
       passwordStatus,
-    }
-  }
-})
+    };
+  },
+});
 </script>
 
 <style scoped>

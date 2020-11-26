@@ -1,12 +1,13 @@
 <template>
   <nav class="navbar">
+    <div class="pl-0"><img :src="`src/assets/S-BlogHub_1.svg`" /></div>
     <div class="navbar-end">
-      <div class="buttons" v-if="authenticated">
+      <div class="buttons nav-buttons" v-if="authenticated">
         <router-link class="button" to="/posts/new">New Post</router-link>
         <button class="button" @click="signOut">Sign out</button>
       </div>
 
-      <div class="buttons" v-else>
+      <div class="buttons nav-buttons" v-else>
         <button class="button" @click="signin">Sign in</button>
         <button class="button" @click="signup">Signup</button>
       </div>
@@ -18,34 +19,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, reactive, markRaw } from 'vue'
-import { useModal } from './useModal'
-import Signup from './Signup.vue'
-import Signin from './Signin.vue'
-import { useStore } from './store'
-import { useRouter } from 'vue-router'
+import { defineComponent, computed, reactive, markRaw } from "vue";
+import { useModal } from "./useModal";
+import Signup from "./Signup.vue";
+import Signin from "./Signin.vue";
+import { useStore } from "./store";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
-    const modal = useModal()
-    const store = useStore()
-    const router = useRouter()
+    const modal = useModal();
+    const store = useStore();
+    const router = useRouter();
 
-    const authenticated = computed(() => store.getState().authors.currentUserId)
+    const authenticated = computed(
+      () => store.getState().authors.currentUserId
+    );
     const signup = () => {
-      modal.component.value = markRaw(Signup)
-      modal.showModal()
-    }
+      modal.component.value = markRaw(Signup);
+      modal.showModal();
+    };
 
     const signin = () => {
-      modal.component.value = markRaw(Signin)
-      modal.showModal()
-    }
+      modal.component.value = markRaw(Signin);
+      modal.showModal();
+    };
 
     const signOut = () => {
-      store.signOut()
-      router.push('/')
-    }
+      store.signOut();
+      router.push("/");
+    };
 
     return {
       modal,
@@ -54,8 +57,16 @@ export default defineComponent({
       authenticated,
       signup,
       signOut,
-      signin
-    }
-  }
-})
+      signin,
+    };
+  },
+});
 </script>
+
+<style scoped>
+.nav-buttons {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 14px;
+}
+</style>

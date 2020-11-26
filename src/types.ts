@@ -22,3 +22,7 @@ export interface Author {
   id: number;
   username: string;
 }
+
+export interface Tag {
+  tag: string;
+}
