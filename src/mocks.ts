@@ -13,6 +13,7 @@ export const basePost: Post = {
   markdown: 'Content',
   html: '<p>Content</p>',
   authorId: 1,
+  authorName: 'San',
   created: moment()
 }
 
