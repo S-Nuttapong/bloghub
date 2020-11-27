@@ -8,7 +8,7 @@
       placeholder="Vue.js"
     />
   </div>
-  <div>
+  <div class="mt-1 mb-1">
     Tags:<span
       class="tag is-primary m-1"
       v-for="(tag, index) in tags"
@@ -17,7 +17,11 @@
       <button class="delete is-small" @click="removeTag(index)"></button>
     </span>
   </div>
-  <button class="button is-primary" @click="addTag" :disabled="disableAdd">
+  <button
+    class="button is-primary is-small"
+    @click="addTag"
+    :disabled="disableAdd"
+  >
     Add Tag
   </button>
 </template>
@@ -37,6 +41,7 @@ export default defineComponent({
     const removeTag = (index: number) => {
       tags.value.splice(index, 1);
     };
+
     return {
       tags,
       value,
@@ -51,5 +56,12 @@ export default defineComponent({
 <style scoped>
 .m-1 {
   margin: 0.25rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 </style>

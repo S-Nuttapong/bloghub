@@ -12,7 +12,7 @@
               data-test="post-title"
             />
           </div>
-          <div class="mt-1">
+          <div class="control mt-3">
             <div class="label">Post Tag</div>
             <tag-selector />
           </div>
@@ -74,7 +74,7 @@ export default defineComponent({
     const contentEditable = ref<null | HTMLDivElement>(null);
     const markdown = ref(props.post.markdown);
     const html = ref("");
-
+    const tags = ref<string[]>([]);
     const options: MarkedOptions = {
       highlight: (code: string) => highlightAuto(code).value,
     };
@@ -84,6 +84,7 @@ export default defineComponent({
     };
 
     const submit = () => {
+      console.log(tags);
       const post: Post = {
         ...props.post,
         title: title.value,
@@ -107,6 +108,7 @@ export default defineComponent({
       submit,
       html,
       title,
+      tags,
       contentEditable,
       handleEdit,
       markdown,
@@ -120,8 +122,7 @@ export default defineComponent({
   white-space: pre-wrap;
 }
 
-.mt-1 {
-  margin-top: 0.25rem;
+.mt-3 {
+  margin-top: 0.75rem;
 }
-
 </style>
