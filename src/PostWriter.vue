@@ -94,11 +94,16 @@ export default defineComponent({
   },
 
   setup(props, ctx) {
-    const title = ref(props.post.title);
+    const initPost = props.post;
+
+    const title = ref(initPost.title);
     const contentEditable = ref<null | HTMLDivElement>(null);
-    const markdown = ref(props.post.markdown);
+    const markdown = ref(initPost.markdown);
     const html = ref("");
-    const tags = ref<string[]>([]);
+
+    const initTags = initPost.tags ? initPost.tags : [];
+    const tags = ref<string[]>(initTags);
+
     const value = ref("");
     const disableAdd = computed(() => !value.value);
     const addTag = () => {
@@ -120,7 +125,7 @@ export default defineComponent({
 
     const submit = () => {
       const post: Post = {
-        ...props.post,
+        ...initPost,
         title: title.value,
         markdown: markdown.value,
         html: html.value,
@@ -156,23 +161,8 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 #markdown {
   white-space: pre-wrap;
-}
-
-.mt-3 {
-  margin-top: 0.75rem;
-}
-
-.m-1 {
-  margin: 0.25rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-}
-.mb-1 {
-  margin-bottom: 0.25rem;
 }
 </style>

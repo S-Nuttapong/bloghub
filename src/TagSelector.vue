@@ -27,15 +27,3 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-.m-1 {
-  margin: 0.25rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-}
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-</style>

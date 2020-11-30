@@ -41,9 +41,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-.ml-1 {
-  margin-left: 0.5rem;
-}
-</style>
