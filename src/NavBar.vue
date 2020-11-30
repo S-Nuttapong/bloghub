@@ -1,6 +1,10 @@
 <template>
   <nav class="navbar">
-    <div class="pl-0"><img :src="`./src/assets/images/logo.svg`" /></div>
+    <div class="pl-0">
+      <router-link to="/"
+        ><img :src="`./src/assets/images/logo.svg`"
+      /></router-link>
+    </div>
     <div class="navbar-end">
       <div class="buttons nav-buttons" v-if="authenticated">
         <router-link class="button" to="/posts/new">New Post</router-link>
