@@ -1,30 +1,4 @@
-<template>
-  <div class="control">
-    <input
-      v-model="value"
-      type="text"
-      class="input"
-      data-test="post-tag"
-      placeholder="Vue.js"
-    />
-  </div>
-  <div class="mt-1 mb-1">
-    Tags:<span
-      class="tag is-primary m-1"
-      v-for="(tag, index) in tags"
-      :key="tag"
-      >{{ tag }}
-      <button class="delete is-small" @click="removeTag(index)"></button>
-    </span>
-  </div>
-  <button
-    class="button is-primary is-small"
-    @click="addTag"
-    :disabled="disableAdd"
-  >
-    Add Tag
-  </button>
-</template>
+
 
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";

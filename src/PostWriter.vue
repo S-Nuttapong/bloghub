@@ -14,7 +14,34 @@
           </div>
           <div class="control mt-3">
             <div class="label">Post Tag</div>
-            <tag-selector />
+            <div class="control">
+              <input
+                v-model="value"
+                type="text"
+                class="input"
+                data-test="post-tag"
+                placeholder="Vue.js"
+              />
+            </div>
+            <div class="mt-1 mb-1">
+              Tags:<span
+                class="tag is-primary m-1"
+                v-for="(tag, index) in tags"
+                :key="tag"
+                >{{ tag }}
+                <button
+                  class="delete is-small"
+                  @click="removeTag(index)"
+                ></button>
+              </span>
+            </div>
+            <button
+              class="button is-primary is-small"
+              @click="addTag"
+              :disabled="disableAdd"
+            >
+              Add Tag
+            </button>
           </div>
         </div>
       </div>
@@ -50,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, watch } from "vue";
+import { defineComponent, ref, onMounted, watch, computed } from "vue";
 import TagSelector from "./TagSelector.vue";
 import { Post } from "./types";
 import { parse, MarkedOptions } from "marked";
@@ -59,9 +86,6 @@ import debounce from "lodash/debounce";
 
 export default defineComponent({
   name: "PostWriter",
-  components: {
-    TagSelector,
-  },
   props: {
     post: {
       type: Object as () => Post,
@@ -75,6 +99,17 @@ export default defineComponent({
     const markdown = ref(props.post.markdown);
     const html = ref("");
     const tags = ref<string[]>([]);
+    const value = ref("");
+    const disableAdd = computed(() => !value.value);
+    const addTag = () => {
+      tags.value.push(value.value);
+
+      value.value = "";
+    };
+    const removeTag = (index: number) => {
+      tags.value.splice(index, 1);
+    };
+
     const options: MarkedOptions = {
       highlight: (code: string) => highlightAuto(code).value,
     };
@@ -84,12 +119,12 @@ export default defineComponent({
     };
 
     const submit = () => {
-      console.log(tags);
       const post: Post = {
         ...props.post,
         title: title.value,
         markdown: markdown.value,
         html: html.value,
+        tags: tags.value,
       };
       ctx.emit("save", post);
     };
@@ -108,10 +143,14 @@ export default defineComponent({
       submit,
       html,
       title,
-      tags,
       contentEditable,
       handleEdit,
       markdown,
+      tags,
+      value,
+      addTag,
+      disableAdd,
+      removeTag,
     };
   },
 });
@@ -124,5 +163,16 @@ export default defineComponent({
 
 .mt-3 {
   margin-top: 0.75rem;
+}
+
+.m-1 {
+  margin: 0.25rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 </style>

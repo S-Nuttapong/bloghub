@@ -10,7 +10,14 @@
       </div>
     </div>
     <div class="column has-text-right">
-      <div><br />Tags: #A #B #C</div>
+      <div>
+        <br /><span
+          class="tag is-primary ml-1"
+          v-for="tag in post.tags"
+          :key="tag"
+          >{{ tag }}</span
+        >
+      </div>
     </div>
   </router-link>
 </template>
@@ -34,3 +41,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.ml-1 {
+  margin-left: 0.5rem;
+}
+</style>

@@ -1,4 +1,5 @@
 import { Moment } from "moment";
+import { readonly } from "vue";
 
 export type Period = "today" | "this week" | "this month";
 
@@ -9,6 +10,7 @@ export interface Post {
   html: string;
   authorId: number;
   authorName?: string;
+  tags?: string[];
   created: Moment;
 }
 

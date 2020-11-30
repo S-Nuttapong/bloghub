@@ -48,7 +48,7 @@ class Store {
   }
 
   public getState() {
-    return readonly(this.state);
+    return this.state;
   }
 
   async createUser(user: User) {
@@ -72,6 +72,7 @@ class Store {
     const response = await axios.post<Post>("/posts", post);
     this.state.posts.all[response.data.id] = response.data;
     this.state.posts.ids.push(response.data.id.toString());
+    console.log(this.state.posts);
   }
 
   async updatePost(post: Post) {
