@@ -50,7 +50,9 @@ export const rollup: Post = {
   created: moment(),
   markdown: rollupMarkdown,
   html: rollupHtml,
-  authorId: 1
+  authorId: 1,
+  tags: ["Vue.js", "TypeScript"]
+  
 }
 
 export const asyncComponents: Post = {
@@ -60,7 +62,8 @@ export const asyncComponents: Post = {
   created: moment(),
   markdown: asyncMarkdown,
   html: asyncHtml,
-  authorId: 1
+  authorId: 1,
+  tags: ["Vue.js"]
 }
 
 export const testing: Post = {
@@ -70,5 +73,6 @@ export const testing: Post = {
   created: moment(),
   markdown: testingMarkdown,
   html: testingHtml,
-  authorId: 1
+  authorId: 1,
+  tags: ["Vue.js", "Testing"]
 }
